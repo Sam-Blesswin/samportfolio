@@ -1,23 +1,28 @@
 import connectToDB from "@/database";
-import About from "@/models/About";
-import Home from "@/models/Home";
+import Home, { HomeDocument } from "@/models/Home";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function PUT(req) {
+export async function PUT(req: Request) {
   try {
     await connectToDB();
 
-    const extractData = await req.json();
+    const extractData: HomeDocument = await req.json();
     const { _id, heading, summary } = extractData;
 
+    let filter = {};
+
+    if (_id) {
+      filter = { _id: _id };
+    }
+
+    const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
     const updateData = await Home.findOneAndUpdate(
-      {
-        _id: _id,
-      },
+      filter,
       { heading, summary },
-      { new: true }
+      options
     );
 
     if (updateData) {

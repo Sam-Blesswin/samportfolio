@@ -1,6 +1,11 @@
 "use client";
 
 import AdminAboutView from "@/components/admin-view/AdminAboutView";
+import AdminHomeView from "@/components/admin-view/AdminHomeView";
+import AdminEducationView from "@/components/admin-view/AdminEducationView";
+import AdminExperienceView from "@/components/admin-view/AdminExperienceView";
+import AdminProjectView from "@/components/admin-view/AdminExperienceView";
+
 import { useEffect, useState } from "react";
 import { getData, updateData } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
@@ -49,7 +54,8 @@ interface DataMap {
 }
 
 export default function AdminView() {
-  const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems.about);
+  const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems.home);
+
   const [homeViewFormData, setHomeViewFormData] = useState(initialHomeFormData);
   const [aboutViewFormData, setAboutViewFormData] =
     useState(initialAboutFormData);
@@ -96,7 +102,18 @@ export default function AdminView() {
 
   const menuItems = [
     {
-      id: tabItems.about,
+      id: "home",
+      label: "Home",
+      component: (
+        <AdminHomeView
+          formData={homeViewFormData}
+          setFormData={setHomeViewFormData}
+          handleClick={handleSaveData}
+        />
+      ),
+    },
+    {
+      id: "about",
       label: "About",
       component: (
         <AdminAboutView
@@ -106,13 +123,49 @@ export default function AdminView() {
         />
       ),
     },
+    {
+      id: "experience",
+      label: "Experience",
+      component: (
+        <AdminExperienceView
+          formData={experienceViewFormData}
+          handleSaveData={handleSaveData}
+          setFormData={setExperienceViewFormData}
+          data={allData?.experience}
+        />
+      ),
+    },
+    {
+      id: "education",
+      label: "Education",
+      component: (
+        <AdminEducationView
+          formData={educationViewFormData}
+          handleSaveData={handleSaveData}
+          setFormData={setEducationViewFormData}
+          data={allData?.education}
+        />
+      ),
+    },
+    {
+      id: "project",
+      label: "Project",
+      component: (
+        <AdminProjectView
+          formData={projectViewFormData}
+          handleSaveData={handleSaveData}
+          setFormData={setProjectViewFormData}
+          data={allData?.project}
+        />
+      ),
+    },
   ];
 
   async function extractAllDatas() {
     const response = await getData(currentSelectedTab);
 
     if (
-      currentSelectedTab === "about" &&
+      currentSelectedTab === tabItems.about &&
       response &&
       response.data &&
       response.data.length
@@ -120,11 +173,13 @@ export default function AdminView() {
       setAboutViewFormData(response.data[0]);
     }
 
-    if (response?.success) {
-      setAllData({
-        ...allData,
-        [currentSelectedTab]: response && response.data,
-      });
+    if (
+      currentSelectedTab === tabItems.home &&
+      response &&
+      response.data &&
+      response.data.length
+    ) {
+      setHomeViewFormData(response && response.data[0]);
     }
 
     console.log("✅ Data extracted");
@@ -136,14 +191,16 @@ export default function AdminView() {
 
   return (
     <div>
-      <nav className="-mb-0.5 flex justify-center spcae-x-6" role="tablist">
+      <nav className="-mb-0.5 flex justify-center spcae-x-6">
         {menuItems.map((item) => (
           <button
             key={item.id}
             type="button"
-            className="p-4 font-bold text-xl"
+            className={`p-4 font-bold text-xl ${
+              item.id === currentSelectedTab ? "text-green-500" : "text-white"
+            }`}
             onClick={() => {
-              setCurrentSelectedTab(item.id);
+              setCurrentSelectedTab(item.id as tabItems);
             }}
           >
             {item.label}

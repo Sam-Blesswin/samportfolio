@@ -66,7 +66,7 @@ const AdminEducationView = ({
         />
         <button
           onClick={() => handleSaveData("education")}
-          className="mt-[10px] border border-green-600 p-4 font-bold text-[16px]"
+          className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
         >
           Add Info
         </button>

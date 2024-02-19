@@ -14,6 +14,24 @@ export async function getData(currentTab: tabItems) {
   }
 }
 
+export async function addData(currentTab: tabItems, formData: FormData) {
+  try {
+    const response = await fetch(`/api/${currentTab}/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function updateData(currentTab: tabItems, formData: FormData) {
   try {
     const response = await fetch(`/api/${currentTab}/update`, {
