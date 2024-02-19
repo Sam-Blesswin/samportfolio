@@ -1,6 +1,6 @@
 import mongoose, { Document, Model } from "mongoose";
 
-interface IAbout extends Document {
+export interface AboutDocument extends Document {
   aboutme: string;
   noofprojects: string;
   yearofexperience: string;
@@ -8,7 +8,7 @@ interface IAbout extends Document {
   skills: string;
 }
 
-const AboutSchema = new mongoose.Schema<IAbout>(
+const AboutSchema = new mongoose.Schema<AboutDocument>(
   {
     aboutme: { type: String, required: true },
     noofprojects: { type: String, required: true },
@@ -19,7 +19,7 @@ const AboutSchema = new mongoose.Schema<IAbout>(
   { timestamps: true }
 );
 
-const About: Model<IAbout> =
-  mongoose.models.About || mongoose.model<IAbout>("About", AboutSchema);
+const About: Model<AboutDocument> =
+  mongoose.models.About || mongoose.model<AboutDocument>("About", AboutSchema);
 
 export default About;

@@ -1,6 +1,6 @@
 import mongoose, { Document, Model } from "mongoose";
 
-interface IExperience extends Document {
+export interface ExperienceDocument extends Document {
   position: string;
   company: string;
   duration: string;
@@ -8,7 +8,7 @@ interface IExperience extends Document {
   jobdescription: string;
 }
 
-const ExperienceSchema = new mongoose.Schema<IExperience>(
+const ExperienceSchema = new mongoose.Schema<ExperienceDocument>(
   {
     position: { type: String, required: true },
     company: { type: String, required: true },
@@ -19,8 +19,8 @@ const ExperienceSchema = new mongoose.Schema<IExperience>(
   { timestamps: true }
 );
 
-const Experience: Model<IExperience> =
+const Experience: Model<ExperienceDocument> =
   mongoose.models.Experience ||
-  mongoose.model<IExperience>("Experience", ExperienceSchema);
+  mongoose.model<ExperienceDocument>("Experience", ExperienceSchema);
 
 export default Experience;

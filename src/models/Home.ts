@@ -1,7 +1,7 @@
 import mongoose, { Document, Model } from "mongoose";
 
-// Updated interface to include new fields
-interface IHome extends Document {
+
+export interface HomeDocument extends Document {
   heading: string;
   summary: string;
   linkedinUrl: string;
@@ -11,8 +11,7 @@ interface IHome extends Document {
   githubUrl: string;
 }
 
-// Updated schema to include new fields
-const HomeSchema = new mongoose.Schema<IHome>(
+const HomeSchema = new mongoose.Schema<HomeDocument>(
   {
     heading: { type: String, required: true },
     summary: { type: String, required: true },
@@ -25,8 +24,7 @@ const HomeSchema = new mongoose.Schema<IHome>(
   { timestamps: true }
 );
 
-// Model creation remains the same
-const Home: Model<IHome> =
-  mongoose.models.Home || mongoose.model<IHome>("Home", HomeSchema);
+const Home: Model<HomeDocument> =
+  mongoose.models.Home || mongoose.model<HomeDocument>("Home", HomeSchema);
 
 export default Home;

@@ -16,7 +16,7 @@ const controls = [
   },
 ];
 
-const Login = ({ formData, setFormData, handleClick }: FormViewProps) => {
+const AdminLogin = ({ formData, setFormData, handleClick }: FormViewProps) => {
   return (
     <div className="w-full">
       <div className="bg-[#ffffff] shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -36,4 +36,4 @@ const Login = ({ formData, setFormData, handleClick }: FormViewProps) => {
   );
 };
 
-export default Login;
+export default AdminLogin;

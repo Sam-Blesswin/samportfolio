@@ -1,12 +1,12 @@
 import mongoose, { Document, Model, model } from "mongoose";
 
-interface IEducation extends Document {
+export interface EducationDocument extends Document {
   degree: string;
   year: string;
   university: string;
 }
 
-const EducationSchema = new mongoose.Schema<IEducation>(
+const EducationSchema = new mongoose.Schema<EducationDocument>(
   {
     degree: { type: String, required: true },
     year: { type: String, required: true },
@@ -15,8 +15,8 @@ const EducationSchema = new mongoose.Schema<IEducation>(
   { timestamps: true }
 );
 
-const Education: Model<IEducation> =
+const Education: Model<EducationDocument> =
   mongoose.models.Education ||
-  mongoose.model<IEducation>("Education", EducationSchema);
+  mongoose.model<EducationDocument>("Education", EducationSchema);
 
 export default Education;

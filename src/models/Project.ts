@@ -1,13 +1,13 @@
 import mongoose, { Document, Model } from "mongoose";
 
-interface IProject extends Document {
+export interface ProjectDocument extends Document {
   name: string;
   technologies: string;
   website?: string;
   github?: string;
 }
 
-const ProjectSchema = new mongoose.Schema<IProject>(
+const ProjectSchema = new mongoose.Schema<ProjectDocument>(
   {
     name: { type: String, required: true },
     website: String,
@@ -17,7 +17,7 @@ const ProjectSchema = new mongoose.Schema<IProject>(
   { timestamps: true }
 );
 
-const Project: Model<IProject> =
-  mongoose.models.Project || mongoose.model<IProject>("Project", ProjectSchema);
+const Project: Model<ProjectDocument> =
+  mongoose.models.Project || mongoose.model<ProjectDocument>("Project", ProjectSchema);
 
 export default Project;

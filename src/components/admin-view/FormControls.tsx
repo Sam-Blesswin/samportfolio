@@ -10,10 +10,7 @@ const FormControls = ({
     <div>
       {controls.map((controlItem) => (
         <div className="mb-4" key={controlItem.name}>
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor={controlItem.name}
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             {controlItem.label}
           </label>
           <input

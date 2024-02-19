@@ -20,3 +20,11 @@ export interface FormControlsProps {
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
+
+export enum tabItems {
+  home = "home",
+  about = "about",
+  education = "education",
+  experience = "experience",
+  project = "project",
+}
