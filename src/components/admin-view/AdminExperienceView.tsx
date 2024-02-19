@@ -26,20 +26,20 @@ const controls = [
     label: "Location",
   },
   {
-    name: "jobprofile",
-    placeholder: "Job Profile",
+    name: "jobdescription",
+    placeholder: "Job Description",
     type: "text",
-    label: "Job Profile",
+    label: "Job Description",
   },
 ];
 
 interface ExperienceItem {
-  id: string;
+  _id: string;
   position: string;
   company: string;
   duration: string;
   location: string;
-  jobprofile: string;
+  jobDescription: string;
 }
 
 interface AdminExperienceViewProps {
@@ -62,14 +62,14 @@ const AdminExperienceView = ({
           {data && data.length
             ? data.map((item) => (
                 <div
-                  className="flex flex-col gap-4 border p-4 border-green-600"
-                  key={item.id}
+                  key={item._id}
+                  className="flex flex-col gap-4 border p-4 border-green-600 text-black"
                 >
                   <p>{item.position}</p>
                   <p>{item.company}</p>
                   <p>{item.duration}</p>
                   <p>{item.location}</p>
-                  <p>{item.jobprofile}</p>
+                  <p>{item.jobDescription}</p>
                 </div>
               ))
             : null}

@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     await connectToDB();
-    const extractData = await About.find({});
+    const extractData: AboutDocument[] = await About.find({});
 
     if (extractData) {
       return NextResponse.json({

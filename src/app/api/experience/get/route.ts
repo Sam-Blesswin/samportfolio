@@ -1,13 +1,11 @@
 import connectToDB from "@/database";
-import Experience from "@/models/Experience";
+import Experience, { ExperienceDocument } from "@/models/Experience";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
-export async function GET(req) {
+export async function GET() {
   try {
     await connectToDB();
-    const extractData = await Experience.find({});
+    const extractData: ExperienceDocument[] = await Experience.find({});
 
     if (extractData) {
       return NextResponse.json({

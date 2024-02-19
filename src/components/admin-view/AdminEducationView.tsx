@@ -15,18 +15,18 @@ const controls: ControlItem[] = [
     label: "Year",
   },
   {
-    name: "college",
-    placeholder: "College Name",
+    name: "university",
+    placeholder: "University Name",
     type: "text",
-    label: "Enter College Name",
+    label: "Enter University Name",
   },
 ];
 
 interface EducationItem {
-  id: string;
+  _id: string;
   degree: string;
   year: string;
-  college: string;
+  university: string;
 }
 
 interface AdminEducationViewProps {
@@ -49,11 +49,11 @@ const AdminEducationView = ({
           {data && data.length
             ? data.map((item) => (
                 <div
-                  className="flex flex-col gap-4 border p-4 border-green-600"
-                  key={item.id}
+                  className="flex flex-col gap-4 border p-4 border-green-600 text-black"
+                  key={item._id}
                 >
                   <p>{item.degree}</p>
-                  <p>{item.college}</p>
+                  <p>{item.university}</p>
                   <p>{item.year}</p>
                 </div>
               ))

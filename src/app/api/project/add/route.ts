@@ -1,13 +1,11 @@
 import connectToDB from "@/database";
-import Project from "@/models/Project";
+import Project, { ProjectDocument } from "@/models/Project";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     await connectToDB();
-    const extractData = await req.json();
+    const extractData:ProjectDocument = await req.json();
     const saveData = await Project.create(extractData);
 
     if (saveData) {

@@ -1,13 +1,14 @@
 import connectToDB from "@/database";
-import Experience from "@/models/Experience";
+import Experience, { ExperienceDocument } from "@/models/Experience";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
+    console.log("hello");
     await connectToDB();
-    const extractData = await req.json();
+    console.log(req);
+    const extractData: ExperienceDocument = await req.json();
+    console.log(extractData);
     const saveData = await Experience.create(extractData);
 
     if (saveData) {

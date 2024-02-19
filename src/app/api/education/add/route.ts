@@ -1,13 +1,11 @@
 import connectToDB from "@/database";
-import Education from "@/models/Education";
+import Education, { EducationDocument } from "@/models/Education";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     await connectToDB();
-    const extractData = await req.json();
+    const extractData: EducationDocument = await req.json();
     const saveData = await Education.create(extractData);
 
     if (saveData) {

@@ -28,7 +28,7 @@ const controls = [
 ];
 
 interface ProjectItem {
-  id: string;
+  _id: string;
   name: string;
   technologies: string;
   website: string;
@@ -55,8 +55,8 @@ export default function AdminProjectView({
           {data && data.length
             ? data.map((item) => (
                 <div
-                  className="flex flex-col gap-4 border p-4 border-green-600"
-                  key={item.id}
+                  className="flex flex-col gap-4 border p-4 border-green-600 text-black"
+                  key={item._id}
                 >
                   <p>{item.name}</p>
                   <p>{item.technologies}</p>

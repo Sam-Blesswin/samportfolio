@@ -4,10 +4,10 @@ import AdminAboutView from "@/components/admin-view/AdminAboutView";
 import AdminHomeView from "@/components/admin-view/AdminHomeView";
 import AdminEducationView from "@/components/admin-view/AdminEducationView";
 import AdminExperienceView from "@/components/admin-view/AdminExperienceView";
-import AdminProjectView from "@/components/admin-view/AdminExperienceView";
+import AdminProjectView from "@/components/admin-view/AdminProjectView";
 
 import { useEffect, useState } from "react";
-import { getData, updateData } from "@/services";
+import { getData, addData, updateData } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
 
 const initialHomeFormData: FormData = {
@@ -28,13 +28,13 @@ const initialExperienceFormData: FormData = {
   company: "",
   duration: "",
   location: "",
-  jobprofile: "",
+  jobdescription: "",
 };
 
 const initialEducationFormData: FormData = {
   degree: "",
   year: "",
-  college: "",
+  university: "",
 };
 
 const initialProjectFormData: FormData = {
@@ -80,21 +80,36 @@ export default function AdminView() {
       project: projectViewFormData,
     };
 
-    const response = await updateData(
-      currentSelectedTab,
-      dataMap[currentSelectedTab]
-    );
-    console.log(response, "response");
+    if (
+      currentSelectedTab === tabItems.about ||
+      currentSelectedTab === tabItems.home
+    ) {
+      const response = await updateData(
+        currentSelectedTab,
+        dataMap[currentSelectedTab]
+      );
 
-    if (response.success) {
-      resetFormDatas();
-      extractAllDatas();
+      console.log(response);
+
+      if (response.success) {
+        extractAllDatas();
+      }
+    } else {
+      const response = await addData(
+        currentSelectedTab,
+        dataMap[currentSelectedTab]
+      );
+
+      console.log(response);
+
+      if (response.success) {
+        resetFormDatas();
+        extractAllDatas();
+      }
     }
   }
 
   function resetFormDatas() {
-    setHomeViewFormData(initialHomeFormData);
-    setAboutViewFormData(initialAboutFormData);
     setExperienceViewFormData(initialExperienceFormData);
     setEducationViewFormData(initialEducationFormData);
     setProjectViewFormData(initialProjectFormData);
@@ -163,6 +178,7 @@ export default function AdminView() {
 
   async function extractAllDatas() {
     const response = await getData(currentSelectedTab);
+    console.log(response);
 
     if (
       currentSelectedTab === tabItems.about &&
@@ -171,19 +187,26 @@ export default function AdminView() {
       response.data.length
     ) {
       setAboutViewFormData(response.data[0]);
-    }
-
-    if (
+    } else if (
       currentSelectedTab === tabItems.home &&
       response &&
       response.data &&
       response.data.length
     ) {
       setHomeViewFormData(response && response.data[0]);
+    } else {
+      if (response?.success) {
+        setAllData({
+          ...allData,
+          [currentSelectedTab]: response && response.data,
+        });
+      }
     }
 
-    console.log("✅ Data extracted");
+    console.log(`${currentSelectedTab} ✅ Data extracted`);
   }
+
+  console.log("allData", allData);
 
   useEffect(() => {
     extractAllDatas();
