@@ -34,11 +34,11 @@ const menuItems: MenuItem[] = [
   },
 ];
 
-function CreateMenus({
+const CreateMenus = ({
   activeLink,
   getMenuItems,
   setActiveLink,
-}: CreateMenusProps) {
+}: CreateMenusProps) => {
   return getMenuItems.map((item) => (
     <LinkScroll
       key={item.id}
@@ -58,9 +58,9 @@ function CreateMenus({
       {item.label}
     </LinkScroll>
   ));
-}
+};
 
-export default function Navbar() {
+const Navbar = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [navbarOpen, setNavbarOpen] = useState(false);
 
@@ -102,23 +102,11 @@ export default function Navbar() {
               activeLink={activeLink}
               getMenuItems={menuItems}
             />
-            <li>
-              <button
-                onClick={() =>
-                  scroller.scrollTo("contact", {
-                    duration: 1500,
-                    delay: 100,
-                    smooth: true,
-                  })
-                }
-                className="py-3 px-6 border-[2px] bg-[#fff] border-primary-500 text-[#000] font-semibold rounded-lg text-xl tracking-widest hover:bg-gradient-to-r from-primary-500 to-secondary-500 hover:text-[#fff] transition-all outline-none"
-              >
-                Contact Me
-              </button>
-            </li>
           </ul>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

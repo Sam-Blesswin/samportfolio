@@ -1,25 +1,24 @@
 import mongoose, { Document, Model } from "mongoose";
 
-
 export interface HomeDocument extends Document {
   heading: string;
   summary: string;
-  linkedinUrl: string;
-  twitterUrl?: string;
-  leetcodeUrl?: string;
+  linkedin: string;
+  twitter?: string;
+  github: string;
   resume: string;
-  githubUrl: string;
+  profilePic: string;
 }
 
 const HomeSchema = new mongoose.Schema<HomeDocument>(
   {
     heading: { type: String, required: true },
     summary: { type: String, required: true },
-    linkedinUrl: { type: String, required: true },
-    twitterUrl: { type: String },
-    leetcodeUrl: { type: String },
+    linkedin: { type: String, required: true },
+    twitter: { type: String },
     resume: { type: String, required: true },
-    githubUrl: { type: String, required: true },
+    github: { type: String, required: true },
+    profilePic: { type: String, required: true },
   },
   { timestamps: true }
 );

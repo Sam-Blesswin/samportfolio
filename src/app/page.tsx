@@ -5,7 +5,7 @@ import ClientHomeView from "@/components/client-view/Home";
 import ClientProjectView from "@/components/client-view/Project";
 
 async function extractAllDatas(currentSection) {
-  const res = await fetch(`http://localhost:3000/api/${currentSection}/get`, {
+  const res = await fetch(`${process.env.API_URL}/${currentSection}/get`, {
     method: "GET",
   });
 
