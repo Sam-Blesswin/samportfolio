@@ -9,7 +9,11 @@ import { HomeData } from "@/types/ClientDataTypes";
 import { scroller } from "react-scroll";
 import profileImg from "@/assets/profile.jpg";
 
-const ClientHomeView = ({ data }: HomeData[]) => {
+interface Props {
+  data: HomeData[];
+}
+
+const ClientHomeView = ({ data }: Props) => {
   console.log(data, "ClientHomeView");
 
   const socialIcons = [

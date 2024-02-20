@@ -1,7 +1,9 @@
 import ClientAboutView from "@/components/client-view/About";
 import ClientContactView from "@/components/client-view/Contact";
 import ClientExperienceAndEducationView from "@/components/client-view/Experience";
+import Footer from "@/components/client-view/Footer";
 import ClientHomeView from "@/components/client-view/Home";
+import Navbar from "@/components/client-view/Navbar";
 import ClientProjectView from "@/components/client-view/Project";
 
 async function extractAllDatas(currentSection) {
@@ -22,6 +24,7 @@ export default async function Home() {
 
   return (
     <div>
+      <Navbar />
       <ClientHomeView data={homeSectionData} />
       <ClientAboutView data={aboutSectionData} />
       <ClientExperienceAndEducationView
@@ -30,6 +33,7 @@ export default async function Home() {
       />
       <ClientProjectView data={projectSectionData} />
       <ClientContactView />
+      <Footer />
     </div>
   );
 }
