@@ -25,8 +25,8 @@ export default async function Home() {
   return (
     <div>
       <Navbar />
-      <ClientHomeView data={homeSectionData} />
-      <ClientAboutView data={aboutSectionData} />
+      <ClientHomeView data={homeSectionData[0]} />
+      <ClientAboutView data={aboutSectionData[0]} />
       <ClientExperienceAndEducationView
         educationData={educationSectionData}
         experienceData={experienceSectionData}

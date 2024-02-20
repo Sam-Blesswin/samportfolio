@@ -7,3 +7,11 @@ export interface HomeData {
   resume: string;
   profilePic: string;
 }
+
+export interface AboutData {
+  aboutme: string;
+  noofclients: string;
+  noofprojects: string;
+  skills: string;
+  yearofexperience: string;
+}

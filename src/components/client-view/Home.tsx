@@ -10,7 +10,7 @@ import { scroller } from "react-scroll";
 import profileImg from "@/assets/profile.jpg";
 
 interface Props {
-  data: HomeData[];
+  data: HomeData;
 }
 
 const ClientHomeView = ({ data }: Props) => {
@@ -20,7 +20,7 @@ const ClientHomeView = ({ data }: Props) => {
     {
       id: "twitter",
       icon: (
-        <Link href={data[0].twitter} target="_blank">
+        <Link href={data.twitter} target="_blank">
           <FaTwitter className="w-[40px] h-[40px]" />
         </Link>
       ),
@@ -28,7 +28,7 @@ const ClientHomeView = ({ data }: Props) => {
     {
       id: "linkedin",
       icon: (
-        <Link href={data[0].linkedin} target="_blank">
+        <Link href={data.linkedin} target="_blank">
           <FaLinkedinIn className="w-[40px] h-[40px] " />
         </Link>
       ),
@@ -36,14 +36,14 @@ const ClientHomeView = ({ data }: Props) => {
     {
       id: "github",
       icon: (
-        <Link href={data[0].github} target="_blank">
+        <Link href={data.github} target="_blank">
           <FaGithub className="w-[40px] h-[40px] " />
         </Link>
       ),
     },
   ];
 
-  const headingList = data[0].heading.split(", ");
+  const headingList = data.heading.split(", ");
   const generateSequence = () => {
     const sequence: (string | number)[] = [];
     headingList.forEach((heading: string, index: number) => {
@@ -78,7 +78,7 @@ const ClientHomeView = ({ data }: Props) => {
               />
             </h1>
             <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-              {data[0].summary}
+              {data.summary}
             </p>
             <motion.div className="flex gap-3 cursor-pointer justify-center md:justify-start p-4">
               {socialIcons.map((item) => (
@@ -113,7 +113,7 @@ const ClientHomeView = ({ data }: Props) => {
                 Hire Me
               </button>
               <Link
-                href={data[0].resume}
+                href={data.resume}
                 target="_blank"
                 className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
               >
