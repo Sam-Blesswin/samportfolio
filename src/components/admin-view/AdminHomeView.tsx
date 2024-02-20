@@ -30,7 +30,7 @@ const AdminHomeView = ({
           setFormData={setFormData}
         />
         <button
-          onClick={() => handleClick("home")}
+          onClick={() => handleClick()}
           className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
         >
           Add Info

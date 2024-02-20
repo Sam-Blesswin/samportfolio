@@ -12,7 +12,7 @@ export interface FormData {
 export interface FormViewProps {
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  handleClick: (section: string) => void;
+  handleClick: () => void;
 }
 
 export interface FormControlsProps {

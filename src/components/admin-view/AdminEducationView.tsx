@@ -30,7 +30,7 @@ interface EducationItem {
 }
 
 interface AdminEducationViewProps {
-  handleSaveData: (section: string) => void;
+  handleSaveData: () => void;
   formData: { [key: string]: any };
   setFormData: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
   data: EducationItem[];
@@ -65,7 +65,7 @@ const AdminEducationView = ({
           setFormData={setFormData}
         />
         <button
-          onClick={() => handleSaveData("education")}
+          onClick={() => handleSaveData()}
           className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
         >
           Add Info

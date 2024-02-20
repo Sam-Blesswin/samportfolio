@@ -5,9 +5,10 @@ import AdminHomeView from "@/components/admin-view/AdminHomeView";
 import AdminEducationView from "@/components/admin-view/AdminEducationView";
 import AdminExperienceView from "@/components/admin-view/AdminExperienceView";
 import AdminProjectView from "@/components/admin-view/AdminProjectView";
+import AdminLogin from "@/components/admin-view/AdminLogin";
 
 import { useEffect, useState } from "react";
-import { getData, addData, updateData } from "@/services";
+import { getData, addData, updateData, login } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
 
 const initialHomeFormData: FormData = {
@@ -59,6 +60,7 @@ export default function AdminView() {
   const [homeViewFormData, setHomeViewFormData] = useState(initialHomeFormData);
   const [aboutViewFormData, setAboutViewFormData] =
     useState(initialAboutFormData);
+
   const [experienceViewFormData, setExperienceViewFormData] = useState(
     initialExperienceFormData
   );
@@ -68,8 +70,10 @@ export default function AdminView() {
   const [projectViewFormData, setProjectViewFormData] = useState(
     initialProjectFormData
   );
-
   const [allData, setAllData] = useState({});
+
+  const [loginFormData, setLoginFormData] = useState(initialLoginFormData);
+  const [authUser, setAuthUser] = useState(false);
 
   async function handleSaveData() {
     const dataMap: DataMap = {
@@ -206,11 +210,31 @@ export default function AdminView() {
     console.log(`${currentSelectedTab} ✅ Data extracted`);
   }
 
-  console.log("allData", allData);
-
   useEffect(() => {
-    extractAllDatas();
-  }, [currentSelectedTab]);
+    if (authUser) {
+      extractAllDatas();
+    }
+  }, [currentSelectedTab, authUser]);
+
+  async function handleLogin() {
+    const res = await login(loginFormData);
+
+    console.log(res, "login");
+
+    if (res?.success) {
+      setAuthUser(true);
+    }
+  }
+
+  if (!authUser) {
+    return (
+      <AdminLogin
+        formData={loginFormData}
+        setFormData={setLoginFormData}
+        handleClick={handleLogin}
+      />
+    );
+  }
 
   return (
     <div>

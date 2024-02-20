@@ -26,7 +26,7 @@ const AdminLogin = ({ formData, setFormData, handleClick }: FormViewProps) => {
           setFormData={setFormData}
         />
         <button
-          onClick={() => handleClick}
+          onClick={() => handleClick()}
           className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
         >
           Login

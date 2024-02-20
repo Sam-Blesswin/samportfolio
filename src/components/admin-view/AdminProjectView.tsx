@@ -38,7 +38,7 @@ interface ProjectItem {
 interface AdminProjectViewProps {
   formData: { [key: string]: any };
   setFormData: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
-  handleSaveData: (section: string) => void;
+  handleSaveData: () => void;
   data: ProjectItem[];
 }
 
@@ -72,7 +72,7 @@ export default function AdminProjectView({
           setFormData={setFormData}
         />
         <button
-          onClick={() => handleSaveData("project")}
+          onClick={() => handleSaveData()}
           className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
         >
           Add Info
