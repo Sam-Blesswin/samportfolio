@@ -17,10 +17,7 @@ const ClientHomeView = ({ data }: HomeData[]) => {
       id: "twitter",
       icon: (
         <Link href={data[0].twitter} target="_blank">
-          <FaTwitter
-            color="rgba(13, 183, 96, 1)"
-            className="w-[40px] h-[40px]"
-          />
+          <FaTwitter className="w-[40px] h-[40px]" />
         </Link>
       ),
     },
@@ -28,10 +25,7 @@ const ClientHomeView = ({ data }: HomeData[]) => {
       id: "linkedin",
       icon: (
         <Link href={data[0].linkedin} target="_blank">
-          <FaLinkedinIn
-            color="rgba(13, 183, 96, 1)"
-            className="w-[40px] h-[40px] "
-          />
+          <FaLinkedinIn className="w-[40px] h-[40px] " />
         </Link>
       ),
     },
@@ -39,10 +33,7 @@ const ClientHomeView = ({ data }: HomeData[]) => {
       id: "github",
       icon: (
         <Link href={data[0].github} target="_blank">
-          <FaGithub
-            color="rgba(13, 183, 96, 1)"
-            className="w-[40px] h-[40px] "
-          />
+          <FaGithub className="w-[40px] h-[40px] " />
         </Link>
       ),
     },
