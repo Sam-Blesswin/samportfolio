@@ -15,3 +15,19 @@ export interface AboutData {
   skills: string;
   yearofexperience: string;
 }
+
+export interface EducationData {
+  degree: string;
+  year: string;
+  university: string;
+  courses: string;
+  description: string;
+}
+
+export interface ExperienceData {
+  position: string;
+  company: string;
+  duration: string;
+  location: string;
+  jobdescription: string;
+}

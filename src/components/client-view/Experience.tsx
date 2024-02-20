@@ -1,20 +1,14 @@
-"use client";
+import { EducationData, ExperienceData } from "@/types/ClientDataTypes";
 
-import {
-  Timeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-} from "@mui/lab";
-import AnimationWrapper from "@/components/client-view/AnimationWrapper";
-import { motion } from "framer-motion";
+interface Props {
+  educationData: EducationData[];
+  experienceData: ExperienceData[];
+}
 
 export default function ClientExperienceAndEducationView({
   educationData,
   experienceData,
-}) {
+}: Props) {
   console.log(educationData, experienceData, "experienceData");
 
   return (
@@ -24,102 +18,78 @@ export default function ClientExperienceAndEducationView({
     >
       <div className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-2 gap-8">
         <div className="flex flex-col gap-5">
-          <AnimationWrapper className={"py-6 sm:py-16"}>
-            <div className="flex flex-col justify-center items-center row-start-2 sm:row-start-1">
-              <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-medium">
-                {"My Experince".split(" ").map((item, index) => (
-                  <span
-                    className={`${
-                      index === 1 ? "text-green-500" : "text-[#000]"
-                    }`}
-                  >
-                    {item}{" "}
-                  </span>
-                ))}
+          <div className="py-6 sm:py-16">
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-medium leading-[70px] mb-4 text-primary-500 ">
+                My Experience
               </h1>
             </div>
-          </AnimationWrapper>
-          <AnimationWrapper>
-            <div className="flex w-full">
-              <motion.div className="container">
-                <Timeline position="right">
-                  {experienceData && experienceData.length
-                    ? experienceData.map((experienceItem) => (
-                        <TimelineItem>
-                          <TimelineSeparator>
-                            <TimelineDot className="bg-green-main" />
-                            <TimelineConnector className="bg-green-main" />
-                          </TimelineSeparator>
-                          <TimelineContent>
-                            <div className="border-[2px] p-4 rounded-[8px] border-green-main mt-[14px] ml-[16px]">
-                              <p className="font-bold">
-                                {experienceItem.duration}
-                              </p>
-                              <h3 className="font-extrabold mt-2">
-                                {experienceItem.company},{" "}
-                                {experienceItem.location}
-                              </h3>
-                              <p className="font-extrabold mt-2">
-                                {experienceItem.position}
-                              </p>
-                              <p className="font-extralight mt-2">
-                                {experienceItem.jobprofile}
-                              </p>
-                            </div>
-                          </TimelineContent>
-                        </TimelineItem>
-                      ))
-                    : null}
-                </Timeline>
-              </motion.div>
+          </div>
+          <div className="w-full">
+            <div className="container">
+              {experienceData && experienceData.length
+                ? experienceData.map((experienceItem, index) => (
+                    <div key={index} className="my-4">
+                      <div className="px-1 inline-block py-1 w-full  rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3">
+                        <div className="block bg-[#121212] hover:bg-slate-800 rounded-lg  px-5 py-2">
+                          <p className="font-bold text-secondary-400">
+                            {experienceItem.duration}
+                          </p>
+                          <h3 className="font-bold mt-2">
+                            {experienceItem.company}, {experienceItem.location}
+                          </h3>
+                          <p className="font-extrabold mt-2">
+                            {experienceItem.position}
+                          </p>
+                          <p className="font-extralight mt-2">
+                            {experienceItem.jobdescription}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                : null}
             </div>
-          </AnimationWrapper>
+          </div>
         </div>
+
         <div className="flex flex-col gap-5">
-          <AnimationWrapper className={"py-6 sm:py-16"}>
-            <div className="flex flex-col justify-center items-center row-start-2 sm:row-start-1">
-              <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-medium">
-                {"My Education".split(" ").map((item, index) => (
-                  <span
-                    className={`${
-                      index === 1 ? "text-green-500" : "text-[#000]"
-                    }`}
-                  >
-                    {item}{" "}
-                  </span>
-                ))}
+          <div className="py-6 sm:py-16">
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-medium leading-[70px] mb-4 text-primary-500">
+                My Education
               </h1>
             </div>
-          </AnimationWrapper>
-          <AnimationWrapper>
-            <div className="flex w-full">
-              <motion.div className="container">
-                <Timeline position="right">
-                  {educationData && educationData.length
-                    ? educationData.map((educationItem) => (
-                        <TimelineItem>
-                          <TimelineSeparator>
-                            <TimelineDot className="bg-green-main" />
-                            <TimelineConnector className="bg-green-main" />
-                          </TimelineSeparator>
-                          <TimelineContent>
-                            <div className="border-[2px] p-4 rounded-[8px] border-green-main mt-[14px] ml-[16px]">
-                              <p className="font-bold">{educationItem.year}</p>
-                              <h3 className="font-extrabold mt-2">
-                                {educationItem.college}
-                              </h3>
-                              <p className="font-extrabold mt-2">
-                                {educationItem.degree}
-                              </p>
-                            </div>
-                          </TimelineContent>
-                        </TimelineItem>
-                      ))
-                    : null}
-                </Timeline>
-              </motion.div>
+          </div>
+          <div className="w-full">
+            <div className="container">
+              {educationData && educationData.length
+                ? educationData.map((educationItem, index) => (
+                    <div key={index} className="my-4">
+                      <div className="px-1 inline-block py-1 w-full  rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3">
+                        <div className="block bg-[#121212] hover:bg-slate-800 rounded-lg  px-5 py-2">
+                          <p className="font-bold text-secondary-400">
+                            {educationItem.year}
+                          </p>
+                          <h3 className="font-extrabold mt-2 ">
+                            {educationItem.university}
+                          </h3>
+                          <p className="font-extrabold mt-2">
+                            {educationItem.degree}
+                          </p>
+                          <p className="font-bold mt-2">
+                            {educationItem.courses}
+                          </p>
+                          <p className="font-extralight mt-2">
+                            {educationItem.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                : null}
             </div>
-          </AnimationWrapper>
+          </div>
         </div>
       </div>
     </div>
