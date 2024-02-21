@@ -1,4 +1,6 @@
-export interface HomeData {
+import { Document } from "mongoose";
+
+export interface HomeDocument extends Document {
   heading: string;
   summary: string;
   linkedin: string;
@@ -6,17 +8,19 @@ export interface HomeData {
   github: string;
   resume: string;
   profilePic: string;
+  email: string;
+  phone: string;
 }
 
-export interface AboutData {
+export interface AboutDocument extends Document {
   aboutme: string;
-  noofclients: string;
   noofprojects: string;
-  skills: string;
   yearofexperience: string;
+  noofclients: string;
+  skills: string;
 }
 
-export interface EducationData {
+export interface EducationDocument extends Document {
   degree: string;
   year: string;
   university: string;
@@ -24,7 +28,7 @@ export interface EducationData {
   description: string;
 }
 
-export interface ExperienceData {
+export interface ExperienceDocument extends Document {
   position: string;
   company: string;
   duration: string;
@@ -32,11 +36,11 @@ export interface ExperienceData {
   jobdescription: string;
 }
 
-export interface ProjectData {
+export interface ProjectDocument extends Document {
   name: string;
   description: string;
   technologies: string;
   image: string;
   github: string;
-  website: string;
+  website?: string;
 }

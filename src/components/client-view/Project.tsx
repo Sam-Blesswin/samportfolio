@@ -2,10 +2,10 @@
 import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import { motion, useInView } from "framer-motion";
-import { ProjectData } from "@/types/ClientDataTypes";
+import { ProjectDocument } from "@/types/DocumentDataTypes";
 
 interface Props {
-  data: ProjectData[];
+  data: ProjectDocument[];
 }
 
 const Project = ({ data }: Props) => {
@@ -18,7 +18,7 @@ const Project = ({ data }: Props) => {
   };
 
   return (
-    <section id="projects">
+    <section id="project">
       <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
         My Projects
       </h2>

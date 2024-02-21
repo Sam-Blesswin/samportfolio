@@ -1,8 +1,11 @@
-import { EducationData, ExperienceData } from "@/types/ClientDataTypes";
+import {
+  EducationDocument,
+  ExperienceDocument,
+} from "@/types/DocumentDataTypes";
 
 interface Props {
-  educationData: EducationData[];
-  experienceData: ExperienceData[];
+  educationData: EducationDocument[];
+  experienceData: ExperienceDocument[];
 }
 
 export default function ClientExperienceAndEducationView({

@@ -1,5 +1,6 @@
 import connectToDB from "@/database";
-import Project, { ProjectDocument } from "@/models/Project";
+import Project from "@/models/Project";
+import { ProjectDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
 export async function GET() {

@@ -1,152 +1,131 @@
 "use client";
+import { HomeDocument } from "@/types/DocumentDataTypes";
+import React, { useState } from "react";
+import { FaEnvelope, FaPhoneSquare } from "react-icons/fa";
 
-import { useEffect, useState } from "react";
-import AnimationWrapper from "@/components/client-view/AnimationWrapper";
-import { addData } from "@/services";
+interface Prop {
+  data: HomeDocument;
+}
 
-const controls = [
-  {
-    name: "name",
-    placeholder: "Enter your name",
-    type: "text",
-    label: "Name",
-  },
-  {
-    name: "email",
-    placeholder: "Enter your email",
-    type: "email",
-    label: "Email",
-  },
-  {
-    name: "message",
-    placeholder: "Enter your message",
-    type: "text",
-    label: "Message",
-  },
-];
+const Contact = ({ data }: Prop) => {
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-const initialFormData = {
-  name: "",
-  email: "",
-  message: "",
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: e.target.email.value,
+      name: e.target.name.value,
+      message: e.target.message.value,
+    };
+    const JSONdata = JSON.stringify(data);
+    const endpoint = "/api/send";
 
-export default function ClientContactView() {
-  const [formData, setFormData] = useState(initialFormData);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
 
-  async function handleSendMessage() {
-    const res = await addData("contact", formData);
-    console.log(res, "contact-res");
+    const response = await fetch(endpoint, options);
+    const resData = await response.json();
 
-    if (res && res.success) {
-      setFormData(initialFormData);
-      setShowSuccessMessage(true);
+    if (response.status === 200) {
+      console.log("Message sent.");
+      setEmailSubmitted(true);
     }
-  }
-
-  useEffect(() => {
-    if (showSuccessMessage) {
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-      }, 1500);
-    }
-  }, [showSuccessMessage]);
-
-  const isValidForm = () => {
-    return formData &&
-      formData.name !== "" &&
-      formData.email !== "" &&
-      formData.message !== ""
-      ? true
-      : false;
   };
 
-  console.log(isValidForm(), "isValidForm()");
-
   return (
-    <div
-      className="max-w-screen-xl mt-24 mb-6 sm:mt-14 sm:mb-14 px-6 sm:px-8 lg:px-16 mx-auto"
+    <section
       id="contact"
+      className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative"
     >
-      <AnimationWrapper className={"py-6"}>
-        <div className="flex flex-col justify-center items-center row-start-2 sm:row-start-1">
-          <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-medium">
-            {"Contact Me".split(" ").map((item, index) => (
-              <span
-                className={`${index === 1 ? "text-green-500" : "text-[#000]"}`}
-              >
-                {item}{" "}
-              </span>
-            ))}
-          </h1>
+      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
+      <div className="z-10">
+        <h5 className="text-xl font-bold text-white my-2">
+          Let&apos;s Connect
+        </h5>
+        <p className="text-[#ADB7BE] mb-4 max-w-md">
+          {" "}
+          I&apos;m currently looking for new opportunities, my inbox is always
+          open. Whether you have a question or just want to say hi, I&apos;ll
+          try my best to get back to you!
+        </p>
+        <div className="flex gap-4">
+          <FaEnvelope className="w-[30px] h-[30px]" />
+          <p className="text-white">{data.email}</p>
         </div>
-      </AnimationWrapper>
-      <div className="text-gray-500 relative">
-        <div className="container px-5">
-          <div className="w-full">
-            <div className="flex flex-wrap -m-2">
-              {controls.map((controlItem) =>
-                controlItem.name === "message" ? (
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label className="text-sm text-[#000]">
-                        {controlItem.label}
-                      </label>
-                      <textarea
-                        id={controlItem.name}
-                        name={controlItem.name}
-                        value={formData[controlItem.name]}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            [controlItem.name]: e.target.value,
-                          })
-                        }
-                        className="w-full border-green-main border-[2px] bg-[#ffffff] rounded  h-32 text-base outline-none text-[#000000] py-1 px-3 resize-none leading-6"
-                      ></textarea>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="p-2 w-full">
-                    <div className="relative">
-                      <label className="text-sm text-[#000]">
-                        {controlItem.label}
-                      </label>
-                      <input
-                        id={controlItem.name}
-                        name={controlItem.name}
-                        value={formData[controlItem.name]}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            [controlItem.name]: e.target.value,
-                          })
-                        }
-                        className="w-full border-green-main border-[2px] bg-[#ffffff] rounded  text-base outline-none text-[#000000] py-1 px-3 leading-6"
-                      />
-                    </div>
-                  </div>
-                )
-              )}
-              {showSuccessMessage && (
-                <p className="text-[14px] font-bold my-[8px]">
-                  Your message is successfully delivered !
-                </p>
-              )}
-              <div className="p-2 w-full">
-                <button
-                  disabled={!isValidForm()}
-                  onClick={handleSendMessage}
-                  className="disabled:opacity-50 py-3 lg:py-4 px-12 lg:px-16 text-white-500 font-semibold rounded-lg text-2xl tracking-widest bg-green-main outline-none"
-                >
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="flex gap-4">
+          <FaPhoneSquare className="w-[30px] h-[30px] transform rotate-90" />
+          <p className="text-white ">{data.phone}</p>
         </div>
       </div>
-    </div>
+      <div>
+        {emailSubmitted ? (
+          <p className="text-green-500 text-sm mt-2">
+            Email sent successfully!
+          </p>
+        ) : (
+          <form className="flex flex-col" onSubmit={handleSubmit}>
+            <div className="mb-6">
+              <label
+                htmlFor="name"
+                className="text-white block mb-2 text-sm font-medium"
+              >
+                Your name
+              </label>
+              <input
+                name="name"
+                type="text"
+                id="name"
+                required
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                placeholder="jacob"
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="email"
+                className="text-white block mb-2 text-sm font-medium"
+              >
+                Your email
+              </label>
+              <input
+                name="email"
+                type="email"
+                id="email"
+                required
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                placeholder="jacob@google.com"
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="message"
+                className="text-white block text-sm mb-2 font-medium"
+              >
+                Message
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                placeholder="Let's talk about..."
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+            >
+              Send Message
+            </button>
+          </form>
+        )}
+      </div>
+    </section>
   );
-}
+};
+
+export default Contact;

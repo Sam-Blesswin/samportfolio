@@ -1,5 +1,6 @@
 import connectToDB from "@/database";
-import Education, { EducationDocument } from "@/models/Education";
+import Education from "@/models/Education";
+import { EducationDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {

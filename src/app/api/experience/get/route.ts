@@ -1,5 +1,6 @@
 import connectToDB from "@/database";
-import Experience, { ExperienceDocument } from "@/models/Experience";
+import Experience from "@/models/Experience";
+import { ExperienceDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
 export async function GET() {

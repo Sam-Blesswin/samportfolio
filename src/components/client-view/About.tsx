@@ -1,10 +1,9 @@
 "use client";
 
-import AnimationWrapper from "@/components/client-view/AnimationWrapper";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import aboutMeImage from "@/assets/about-image.png";
-import { AboutData } from "@/types/ClientDataTypes";
+import { AboutDocument } from "@/types/DocumentDataTypes";
 
 function variants() {
   return {
@@ -24,7 +23,7 @@ function variants() {
 }
 
 interface Props {
-  data: AboutData;
+  data: AboutDocument;
 }
 
 export default function ClientAboutView({ data }: Props) {
@@ -53,7 +52,12 @@ export default function ClientAboutView({ data }: Props) {
       id="about"
     >
       <div className="w-full flex">
-        <AnimationWrapper className="rounded-lg w-full grid-flow-row grid grid-cols-1 sm:grid-cols-3 py-9 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-primary-500 bg-ehite-500 z-10">
+        <motion.div
+          initial="offscreen"
+          whileInView={"onscreen"}
+          viewport={{ once: true, amount: 0.8 }}
+          className="rounded-lg w-full grid-flow-row grid grid-cols-1 sm:grid-cols-3 py-9 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-primary-500 bg-ehite-500 z-10"
+        >
           {aboutDataInfo.map((infoItem, index) => (
             <motion.div
               className={`flex items-center justify-start
@@ -81,7 +85,7 @@ export default function ClientAboutView({ data }: Props) {
               </div>
             </motion.div>
           ))}
-        </AnimationWrapper>
+        </motion.div>
       </div>
       <div className="flex flex-col justify-center items-center row-start-2 sm:row-start-1">
         <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-medium text-primary-500">
@@ -90,7 +94,12 @@ export default function ClientAboutView({ data }: Props) {
         <p className="text-[#fff] mt-4 mb-8 font-bold">{data?.aboutme}</p>
       </div>
       <div className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-2 gap-8">
-        <AnimationWrapper className="flex w-full">
+        <motion.div
+          initial="offscreen"
+          whileInView={"onscreen"}
+          viewport={{ once: true, amount: 0.8 }}
+          className="flex w-full"
+        >
           <motion.div variants={variants()} className="h-full w-full p-4">
             <Image
               src={aboutMeImage}
@@ -101,8 +110,13 @@ export default function ClientAboutView({ data }: Props) {
               quality={100}
             />
           </motion.div>
-        </AnimationWrapper>
-        <AnimationWrapper className={"flex items-center w-full p-4"}>
+        </motion.div>
+        <motion.div
+          initial="offscreen"
+          whileInView={"onscreen"}
+          viewport={{ once: true, amount: 0.8 }}
+          className={"flex items-center w-full p-4"}
+        >
           <motion.div
             variants={variants()}
             className="grid gap-4 grid-cols-3 h-full max-h-[200px] w-full"
@@ -118,7 +132,7 @@ export default function ClientAboutView({ data }: Props) {
               </motion.div>
             ))}
           </motion.div>
-        </AnimationWrapper>
+        </motion.div>
       </div>
     </div>
   );

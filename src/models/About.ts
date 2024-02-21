@@ -1,12 +1,5 @@
-import mongoose, { Document, Model } from "mongoose";
-
-export interface AboutDocument extends Document {
-  aboutme: string;
-  noofprojects: string;
-  yearofexperience: string;
-  noofclients: string;
-  skills: string;
-}
+import { AboutDocument } from "@/types/DocumentDataTypes";
+import mongoose, { Model } from "mongoose";
 
 const AboutSchema = new mongoose.Schema<AboutDocument>(
   {

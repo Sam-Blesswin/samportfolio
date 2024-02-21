@@ -1,14 +1,5 @@
-import mongoose, { Document, Model } from "mongoose";
-
-export interface HomeDocument extends Document {
-  heading: string;
-  summary: string;
-  linkedin: string;
-  twitter?: string;
-  github: string;
-  resume: string;
-  profilePic: string;
-}
+import { HomeDocument } from "@/types/DocumentDataTypes";
+import mongoose, { Model } from "mongoose";
 
 const HomeSchema = new mongoose.Schema<HomeDocument>(
   {
@@ -19,6 +10,8 @@ const HomeSchema = new mongoose.Schema<HomeDocument>(
     resume: { type: String, required: true },
     github: { type: String, required: true },
     profilePic: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
   },
   { timestamps: true }
 );

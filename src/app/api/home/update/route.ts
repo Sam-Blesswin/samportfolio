@@ -1,5 +1,6 @@
 import connectToDB from "@/database";
-import Home, { HomeDocument } from "@/models/Home";
+import Home from "@/models/Home";
+import { HomeDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
 export async function PUT(req: Request) {

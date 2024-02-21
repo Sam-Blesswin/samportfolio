@@ -5,12 +5,12 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa";
-import { HomeData } from "@/types/ClientDataTypes";
+import { HomeDocument } from "@/types/DocumentDataTypes";
 import { scroller } from "react-scroll";
 import profileImg from "@/assets/profile.jpg";
 
 interface Props {
-  data: HomeData;
+  data: HomeDocument;
 }
 
 const ClientHomeView = ({ data }: Props) => {

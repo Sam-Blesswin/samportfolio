@@ -1,7 +1,7 @@
 import React from "react";
 import { CodeBracketIcon, EyeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { ProjectData } from "@/types/ClientDataTypes";
+import { ProjectData } from "@/types/DocumentDataTypes";
 
 const ProjectCard = ({
   image,

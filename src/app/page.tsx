@@ -6,7 +6,7 @@ import ClientHomeView from "@/components/client-view/Home";
 import Navbar from "@/components/client-view/Navbar";
 import ClientProjectView from "@/components/client-view/Project";
 
-async function extractAllDatas(currentSection) {
+async function extractAllDatas(currentSection: string) {
   const res = await fetch(`${process.env.API_URL}/${currentSection}/get`, {
     method: "GET",
   });
@@ -33,7 +33,7 @@ export default async function Home() {
           experienceData={experienceSectionData}
         />
         <ClientProjectView data={projectSectionData} />
-        <ClientContactView />
+        <ClientContactView data={homeSectionData[0]} />
       </div>
       <Footer />
     </div>

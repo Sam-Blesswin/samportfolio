@@ -1,11 +1,12 @@
 import connectToDB from "@/database";
-import Project, { ProjectDocument } from "@/models/Project";
+import Project from "@/models/Project";
+import { ProjectDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     await connectToDB();
-    const extractData:ProjectDocument = await req.json();
+    const extractData: ProjectDocument = await req.json();
     const saveData = await Project.create(extractData);
 
     if (saveData) {

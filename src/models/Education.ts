@@ -1,16 +1,13 @@
-import mongoose, { Document, Model, model } from "mongoose";
-
-export interface EducationDocument extends Document {
-  degree: string;
-  year: string;
-  university: string;
-}
+import { EducationDocument } from "@/types/DocumentDataTypes";
+import mongoose, { Model } from "mongoose";
 
 const EducationSchema = new mongoose.Schema<EducationDocument>(
   {
     degree: { type: String, required: true },
     year: { type: String, required: true },
     university: { type: String, required: true },
+    courses: String,
+    description: String,
   },
   { timestamps: true }
 );

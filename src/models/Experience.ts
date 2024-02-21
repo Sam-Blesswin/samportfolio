@@ -1,12 +1,5 @@
-import mongoose, { Document, Model } from "mongoose";
-
-export interface ExperienceDocument extends Document {
-  position: string;
-  company: string;
-  duration: string;
-  location: string;
-  jobdescription: string;
-}
+import { ExperienceDocument } from "@/types/DocumentDataTypes";
+import mongoose, { Model } from "mongoose";
 
 const ExperienceSchema = new mongoose.Schema<ExperienceDocument>(
   {
