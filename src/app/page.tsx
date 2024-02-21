@@ -25,14 +25,16 @@ export default async function Home() {
   return (
     <div>
       <Navbar />
-      <ClientHomeView data={homeSectionData[0]} />
-      <ClientAboutView data={aboutSectionData[0]} />
-      <ClientExperienceAndEducationView
-        educationData={educationSectionData}
-        experienceData={experienceSectionData}
-      />
-      <ClientProjectView data={projectSectionData} />
-      <ClientContactView />
+      <div className="container mt-24 mx-auto px-12 py-4">
+        <ClientHomeView data={homeSectionData[0]} />
+        <ClientAboutView data={aboutSectionData[0]} />
+        <ClientExperienceAndEducationView
+          educationData={educationSectionData}
+          experienceData={experienceSectionData}
+        />
+        <ClientProjectView data={projectSectionData} />
+        <ClientContactView />
+      </div>
       <Footer />
     </div>
   );

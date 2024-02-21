@@ -31,3 +31,12 @@ export interface ExperienceData {
   location: string;
   jobdescription: string;
 }
+
+export interface ProjectData {
+  name: string;
+  description: string;
+  technologies: string;
+  image: string;
+  github: string;
+  website: string;
+}

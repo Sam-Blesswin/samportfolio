@@ -56,7 +56,7 @@ const ClientHomeView = ({ data }: Props) => {
   };
 
   return (
-    <div className="container mt-24 mx-auto px-12 py-4" id="home">
+    <div id="home">
       <section className="lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-12">
           <motion.div
