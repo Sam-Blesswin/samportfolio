@@ -25,6 +25,18 @@ const controls = [
     type: "text",
     label: "github",
   },
+  {
+    name: "description",
+    placeholder: "description ",
+    type: "text",
+    label: "Enter description",
+  },
+  {
+    name: "image",
+    placeholder: "image ",
+    type: "text",
+    label: "Enter image url",
+  },
 ];
 
 interface ProjectItem {
@@ -33,6 +45,8 @@ interface ProjectItem {
   technologies: string;
   website: string;
   github: string;
+  description: string;
+  image: string;
 }
 
 interface AdminProjectViewProps {
@@ -62,6 +76,8 @@ export default function AdminProjectView({
                   <p>{item.technologies}</p>
                   <p>{item.website}</p>
                   <p>{item.github}</p>
+                  <p>{item.description}</p>
+                  <p>{item.image}</p>
                 </div>
               ))
             : null}

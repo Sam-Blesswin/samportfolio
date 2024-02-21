@@ -14,6 +14,49 @@ const controls: ControlItem[] = [
     type: "text",
     label: "Enter Career summary",
   },
+  {
+    name: "linkedin",
+    placeholder: "Enter linkedin",
+    type: "text",
+    label: "Enter linkedin",
+  },
+  {
+    name: "twitter",
+    placeholder: "Enter twitter",
+    type: "text",
+    label: "Enter twitter",
+  },
+  {
+    name: "github",
+    placeholder: "Enter github",
+    type: "text",
+    label: "Enter github",
+  },
+  {
+    name: "resume",
+    placeholder: "Enter resume",
+    type: "text",
+    label: "Enter resume",
+  },
+
+  {
+    name: "profilePic",
+    placeholder: "Enter profilePic",
+    type: "text",
+    label: "Enter profilePic",
+  },
+  {
+    name: "email",
+    placeholder: "Enter email",
+    type: "text",
+    label: "Enter email",
+  },
+  {
+    name: "phone",
+    placeholder: "Enter phone",
+    type: "text",
+    label: "Enter phone",
+  },
 ];
 
 const AdminHomeView = ({

@@ -20,6 +20,18 @@ const controls: ControlItem[] = [
     type: "text",
     label: "Enter University Name",
   },
+  {
+    name: "courses",
+    placeholder: "courses",
+    type: "text",
+    label: "Enter courses",
+  },
+  {
+    name: "description",
+    placeholder: "description",
+    type: "text",
+    label: "Enter description",
+  },
 ];
 
 interface EducationItem {
@@ -27,6 +39,8 @@ interface EducationItem {
   degree: string;
   year: string;
   university: string;
+  courses: string;
+  description: string;
 }
 
 interface AdminEducationViewProps {
@@ -55,6 +69,8 @@ const AdminEducationView = ({
                   <p>{item.degree}</p>
                   <p>{item.university}</p>
                   <p>{item.year}</p>
+                  <p>{item.courses}</p>
+                  <p>{item.description}</p>
                 </div>
               ))
             : null}
