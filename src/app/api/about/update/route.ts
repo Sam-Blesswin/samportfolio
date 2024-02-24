@@ -20,7 +20,7 @@ export async function PUT(req: Request) {
     //when a new document is added id is null
     let filter = {};
 
-    if (_id) {
+    if (_id != "") {
       filter = { _id: _id };
     }
 

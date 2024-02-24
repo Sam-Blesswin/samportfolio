@@ -8,15 +8,24 @@ import AdminProjectView from "@/components/admin-view/AdminProjectView";
 import AdminLogin from "@/components/admin-view/AdminLogin";
 
 import { useEffect, useState } from "react";
-import { getData, addData, updateData, login } from "@/services";
+import { getData, addData, updateData, deleteData, login } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
 
 const initialHomeFormData: FormData = {
+  _id: "",
   heading: "",
   summary: "",
+  linkedin: "",
+  twitter: "",
+  github: "",
+  resume: "",
+  profilePic: "",
+  email: "",
+  phone: "",
 };
 
 const initialAboutFormData: FormData = {
+  _id: "",
   aboutme: "",
   noofprojects: "",
   yearofexperience: "",
@@ -25,6 +34,7 @@ const initialAboutFormData: FormData = {
 };
 
 const initialExperienceFormData: FormData = {
+  _id: "",
   position: "",
   company: "",
   duration: "",
@@ -33,16 +43,22 @@ const initialExperienceFormData: FormData = {
 };
 
 const initialEducationFormData: FormData = {
+  _id: "",
   degree: "",
   year: "",
   university: "",
+  courses: "",
+  description: "",
 };
 
 const initialProjectFormData: FormData = {
+  _id: "",
   name: "",
-  website: "",
+  description: "",
   technologies: "",
+  image: "",
   github: "",
+  website: "",
 };
 
 const initialLoginFormData: FormData = {
@@ -75,6 +91,16 @@ export default function AdminView() {
   const [loginFormData, setLoginFormData] = useState(initialLoginFormData);
   const [authUser, setAuthUser] = useState(false);
 
+  async function handleDeleteData(id: string) {
+    const response = await deleteData(currentSelectedTab, id);
+
+    console.log(response);
+
+    if (response.success) {
+      extractAllDatas();
+    }
+  }
+
   async function handleSaveData() {
     const dataMap: DataMap = {
       home: homeViewFormData,
@@ -86,7 +112,8 @@ export default function AdminView() {
 
     if (
       currentSelectedTab === tabItems.about ||
-      currentSelectedTab === tabItems.home
+      currentSelectedTab === tabItems.home ||
+      currentSelectedTab === tabItems.education
     ) {
       const response = await updateData(
         currentSelectedTab,
@@ -96,6 +123,7 @@ export default function AdminView() {
       console.log(response);
 
       if (response.success) {
+        resetFormDatas();
         extractAllDatas();
       }
     } else {
@@ -161,6 +189,7 @@ export default function AdminView() {
         <AdminEducationView
           formData={educationViewFormData}
           handleSaveData={handleSaveData}
+          handleDeleteData={handleDeleteData}
           setFormData={setEducationViewFormData}
           data={allData?.education}
         />

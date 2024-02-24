@@ -8,11 +8,22 @@ export async function PUT(req: Request) {
     await connectToDB();
 
     const extractData: HomeDocument = await req.json();
-    const { _id, heading, summary } = extractData;
+    const {
+      _id,
+      heading,
+      summary,
+      linkedin,
+      twitter,
+      github,
+      resume,
+      profilePic,
+      email,
+      phone,
+    } = extractData;
 
     let filter = {};
 
-    if (_id) {
+    if (_id != "") {
       filter = { _id: _id };
     }
 
@@ -20,7 +31,17 @@ export async function PUT(req: Request) {
 
     const updateData = await Home.findOneAndUpdate(
       filter,
-      { heading, summary },
+      {
+        heading,
+        summary,
+        linkedin,
+        twitter,
+        github,
+        resume,
+        profilePic,
+        email,
+        phone,
+      },
       options
     );
 
