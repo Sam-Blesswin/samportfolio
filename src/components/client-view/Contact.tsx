@@ -10,13 +10,21 @@ interface Prop {
 const Contact = ({ data }: Prop) => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+
+    const email = form.elements.namedItem("email") as HTMLInputElement;
+    const name = form.elements.namedItem("name") as HTMLInputElement;
+    const message = form.elements.namedItem("message") as HTMLInputElement;
+
     const data = {
-      email: e.target.email.value,
-      name: e.target.name.value,
-      message: e.target.message.value,
+      email: email.value,
+      name: name.value,
+      message: message.value,
     };
+
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/send";
 

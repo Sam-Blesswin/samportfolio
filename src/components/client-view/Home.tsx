@@ -8,6 +8,7 @@ import { FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa";
 import { HomeDocument } from "@/types/DocumentDataTypes";
 import { scroller } from "react-scroll";
 import profileImg from "@/assets/profile.jpg";
+import { Url } from "next/dist/shared/lib/router/router";
 
 interface Props {
   data: HomeDocument;
@@ -20,7 +21,7 @@ const ClientHomeView = ({ data }: Props) => {
     {
       id: "twitter",
       icon: (
-        <Link href={data.twitter} target="_blank">
+        <Link href={data.twitter as Url} target="_blank">
           <FaTwitter className="w-[40px] h-[40px]" />
         </Link>
       ),
@@ -28,7 +29,7 @@ const ClientHomeView = ({ data }: Props) => {
     {
       id: "linkedin",
       icon: (
-        <Link href={data.linkedin} target="_blank">
+        <Link href={data.linkedin as Url} target="_blank">
           <FaLinkedinIn className="w-[40px] h-[40px] " />
         </Link>
       ),
@@ -36,7 +37,7 @@ const ClientHomeView = ({ data }: Props) => {
     {
       id: "github",
       icon: (
-        <Link href={data.github} target="_blank">
+        <Link href={data.github as Url} target="_blank">
           <FaGithub className="w-[40px] h-[40px] " />
         </Link>
       ),

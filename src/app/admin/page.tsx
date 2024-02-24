@@ -8,7 +8,7 @@ import AdminProjectView from "@/components/admin-view/AdminProjectView";
 import AdminLogin from "@/components/admin-view/AdminLogin";
 
 import { useEffect, useState } from "react";
-import { getData, addData, updateData, deleteData, login } from "@/services";
+import { getData, updateData, deleteData, login } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
 
 const initialHomeFormData: FormData = {
@@ -70,6 +70,10 @@ interface DataMap {
   [key: string]: FormData;
 }
 
+interface AllData {
+  [key: string]: any;
+}
+
 export default function AdminView() {
   const [currentSelectedTab, setCurrentSelectedTab] = useState(tabItems.home);
 
@@ -86,7 +90,7 @@ export default function AdminView() {
   const [projectViewFormData, setProjectViewFormData] = useState(
     initialProjectFormData
   );
-  const [allData, setAllData] = useState({});
+  const [allData, setAllData] = useState<AllData>({});
 
   const [loginFormData, setLoginFormData] = useState(initialLoginFormData);
   const [authUser, setAuthUser] = useState(false);

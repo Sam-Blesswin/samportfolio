@@ -1,6 +1,5 @@
-import { Document } from "mongoose";
-
-export interface HomeDocument extends Document {
+export interface HomeDocument {
+  _id?: string;
   heading: string;
   summary: string;
   linkedin: string;
@@ -12,7 +11,8 @@ export interface HomeDocument extends Document {
   phone: string;
 }
 
-export interface AboutDocument extends Document {
+export interface AboutDocument {
+  _id?: string;
   aboutme: string;
   noofprojects: string;
   yearofexperience: string;
@@ -20,7 +20,8 @@ export interface AboutDocument extends Document {
   skills: string;
 }
 
-export interface EducationDocument extends Document {
+export interface EducationDocument {
+  _id?: string;
   degree: string;
   year: string;
   university: string;
@@ -28,7 +29,8 @@ export interface EducationDocument extends Document {
   description: string;
 }
 
-export interface ExperienceDocument extends Document {
+export interface ExperienceDocument {
+  _id?: string;
   position: string;
   company: string;
   duration: string;
@@ -36,7 +38,8 @@ export interface ExperienceDocument extends Document {
   jobdescription: string;
 }
 
-export interface ProjectDocument extends Document {
+export interface ProjectDocument {
+  _id?: string;
   name: string;
   description: string;
   technologies: string;

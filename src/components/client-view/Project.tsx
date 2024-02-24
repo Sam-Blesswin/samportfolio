@@ -32,7 +32,6 @@ const Project = ({ data }: Props) => {
             transition={{ duration: 0.3, delay: index * 0.4 }}
           >
             <ProjectCard
-              key={index}
               name={project.name}
               description={project.description}
               image={project.image}

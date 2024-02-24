@@ -65,7 +65,7 @@ export default function AdminProjectView({
   handleDeleteData,
   data,
 }: AdminProjectViewProps) {
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (formData && formData._id && formRef.current) {

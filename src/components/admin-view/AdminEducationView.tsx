@@ -59,7 +59,7 @@ const AdminEducationView = ({
   setFormData,
   data,
 }: AdminEducationViewProps) => {
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (formData && formData._id && formRef.current) {
