@@ -10,6 +10,7 @@ import AdminLogin from "@/components/admin-view/AdminLogin";
 import { useEffect, useState } from "react";
 import { getData, updateData, deleteData, login } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
+import action from "../actions";
 
 const initialHomeFormData: FormData = {
   _id: "",
@@ -122,6 +123,7 @@ export default function AdminView() {
     console.log(response);
 
     if (response.success) {
+      action();
       resetFormDatas();
       extractAllDatas();
     }
