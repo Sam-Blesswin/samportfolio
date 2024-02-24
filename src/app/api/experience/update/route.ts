@@ -3,16 +3,40 @@ import Experience from "@/models/Experience";
 import { ExperienceDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function PUT(req: Request) {
   try {
-    console.log("hello");
     await connectToDB();
-    console.log(req);
-    const extractData: ExperienceDocument = await req.json();
-    console.log(extractData);
-    const saveData = await Experience.create(extractData);
 
-    if (saveData) {
+    const extractData: ExperienceDocument = await req.json();
+    const { _id, position, company, duration, location, jobdescription } =
+      extractData;
+
+    let updateData;
+
+    console.log("id:" + _id);
+
+    if (!_id) {
+      updateData = await Experience.create({
+        position,
+        company,
+        duration,
+        location,
+        jobdescription,
+      });
+    } else {
+      updateData = await Experience.findOneAndUpdate(
+        { _id },
+        {
+          position,
+          company,
+          duration,
+          location,
+          jobdescription,
+        }
+      );
+    }
+
+    if (updateData) {
       return NextResponse.json({
         success: true,
         message: "Data saved successfully",

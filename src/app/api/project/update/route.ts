@@ -3,13 +3,42 @@ import Project from "@/models/Project";
 import { ProjectDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function PUT(req: Request) {
   try {
     await connectToDB();
-    const extractData: ProjectDocument = await req.json();
-    const saveData = await Project.create(extractData);
 
-    if (saveData) {
+    const extractData: ProjectDocument = await req.json();
+    const { _id, name, description, technologies, image, github, website } =
+      extractData;
+
+    let updateData;
+
+    console.log("id:" + _id);
+
+    if (!_id) {
+      updateData = await Project.create({
+        name,
+        description,
+        technologies,
+        image,
+        github,
+        website,
+      });
+    } else {
+      updateData = await Project.findOneAndUpdate(
+        { _id },
+        {
+          name,
+          description,
+          technologies,
+          image,
+          github,
+          website,
+        }
+      );
+    }
+
+    if (updateData) {
       return NextResponse.json({
         success: true,
         message: "Data saved successfully",

@@ -1,4 +1,5 @@
 import FormControls from "./FormControls";
+import React, { useRef, useEffect } from "react";
 
 const controls = [
   {
@@ -53,6 +54,7 @@ interface AdminProjectViewProps {
   formData: { [key: string]: any };
   setFormData: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
   handleSaveData: () => void;
+  handleDeleteData: (id: string) => void;
   data: ProjectItem[];
 }
 
@@ -60,8 +62,16 @@ export default function AdminProjectView({
   formData,
   setFormData,
   handleSaveData,
+  handleDeleteData,
   data,
 }: AdminProjectViewProps) {
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (formData && formData._id && formRef.current) {
+      formRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [formData]);
   return (
     <div className="w-full">
       <div className="bg-[#ffffff] shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -78,21 +88,37 @@ export default function AdminProjectView({
                   <p>{item.github}</p>
                   <p>{item.description}</p>
                   <p>{item.image}</p>
+                  <button
+                    onClick={() => {
+                      setFormData(item);
+                    }}
+                    className="flex p-4 bg-green-600 text-black"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteData(item._id)}
+                    className="flex  p-4 bg-red-600 text-black"
+                  >
+                    Delete
+                  </button>
                 </div>
               ))
             : null}
         </div>
-        <FormControls
-          controls={controls}
-          formData={formData}
-          setFormData={setFormData}
-        />
-        <button
-          onClick={() => handleSaveData()}
-          className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
-        >
-          Add Info
-        </button>
+        <div ref={formRef}>
+          <FormControls
+            controls={controls}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <button
+            onClick={() => handleSaveData()}
+            className="mt-[10px] border border-green-600 p-4 font-bold text-[16px] text-black"
+          >
+            Add Info
+          </button>
+        </div>
       </div>
     </div>
   );

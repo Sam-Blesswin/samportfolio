@@ -110,34 +110,16 @@ export default function AdminView() {
       project: projectViewFormData,
     };
 
-    if (
-      currentSelectedTab === tabItems.about ||
-      currentSelectedTab === tabItems.home ||
-      currentSelectedTab === tabItems.education
-    ) {
-      const response = await updateData(
-        currentSelectedTab,
-        dataMap[currentSelectedTab]
-      );
+    const response = await updateData(
+      currentSelectedTab,
+      dataMap[currentSelectedTab]
+    );
 
-      console.log(response);
+    console.log(response);
 
-      if (response.success) {
-        resetFormDatas();
-        extractAllDatas();
-      }
-    } else {
-      const response = await addData(
-        currentSelectedTab,
-        dataMap[currentSelectedTab]
-      );
-
-      console.log(response);
-
-      if (response.success) {
-        resetFormDatas();
-        extractAllDatas();
-      }
+    if (response.success) {
+      resetFormDatas();
+      extractAllDatas();
     }
   }
 
@@ -177,6 +159,7 @@ export default function AdminView() {
         <AdminExperienceView
           formData={experienceViewFormData}
           handleSaveData={handleSaveData}
+          handleDeleteData={handleDeleteData}
           setFormData={setExperienceViewFormData}
           data={allData?.experience}
         />
@@ -202,6 +185,7 @@ export default function AdminView() {
         <AdminProjectView
           formData={projectViewFormData}
           handleSaveData={handleSaveData}
+          handleDeleteData={handleDeleteData}
           setFormData={setProjectViewFormData}
           data={allData?.project}
         />
