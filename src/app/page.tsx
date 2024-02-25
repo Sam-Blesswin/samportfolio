@@ -5,36 +5,13 @@ import Footer from "@/components/client-view/Footer";
 import ClientHomeView from "@/components/client-view/Home";
 import Navbar from "@/components/client-view/Navbar";
 import ClientProjectView from "@/components/client-view/Project";
-import connectToDB from "@/database";
-import About from "@/models/About";
-import Education from "@/models/Education";
-import Experience from "@/models/Experience";
-import Home from "@/models/Home";
-import Project from "@/models/Project";
 import { getData } from "@/services";
 import { tabItems } from "@/types/FormTypes";
 
-const sectionModelMap: { [key: string]: any } = {
-  about: About,
-  home: Home,
-  education: Education,
-  experience: Experience,
-  project: Project,
-};
-
 async function extractAllDatas(currentSection: tabItems) {
   try {
-    if (process.env.MODE === "build") {
-      await connectToDB();
-
-      const model = sectionModelMap[currentSection];
-
-      const extractData: any = await model.find({});
-      return extractData;
-    } else {
-      const data = await getData(currentSection);
-      return data && data.data ? data.data : null;
-    }
+    const data = await getData(currentSection);
+    return data && data.data ? data.data : null;
   } catch (error) {
     console.error(`An error occurred: ${error}`);
     return null;
