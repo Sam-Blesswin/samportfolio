@@ -11,6 +11,8 @@ import Education from "@/models/Education";
 import Experience from "@/models/Experience";
 import Home from "@/models/Home";
 import Project from "@/models/Project";
+import { getData } from "@/services";
+import { tabItems } from "@/types/FormTypes";
 
 const sectionModelMap: { [key: string]: any } = {
   about: About,
@@ -20,7 +22,7 @@ const sectionModelMap: { [key: string]: any } = {
   project: Project,
 };
 
-async function extractAllDatas(currentSection: string) {
+async function extractAllDatas(currentSection: tabItems) {
   try {
     if (process.env.MODE === "build") {
       await connectToDB();
@@ -30,18 +32,7 @@ async function extractAllDatas(currentSection: string) {
       const extractData: any = await model.find({});
       return extractData;
     } else {
-      const response = await fetch(
-        `${process.env.API_URL}/${currentSection}/get`,
-        {
-          method: "GET",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.statusText}`);
-      }
-
-      const data = await response.json();
+      const data = await getData(currentSection);
       return data && data.data ? data.data : null;
     }
   } catch (error) {
@@ -51,11 +42,11 @@ async function extractAllDatas(currentSection: string) {
 }
 
 export default async function HomePage() {
-  const homeSectionData = await extractAllDatas("home");
-  const aboutSectionData = await extractAllDatas("about");
-  const experienceSectionData = await extractAllDatas("experience");
-  const educationSectionData = await extractAllDatas("education");
-  const projectSectionData = await extractAllDatas("project");
+  const homeSectionData = await extractAllDatas(tabItems.home);
+  const aboutSectionData = await extractAllDatas(tabItems.about);
+  const experienceSectionData = await extractAllDatas(tabItems.experience);
+  const educationSectionData = await extractAllDatas(tabItems.education);
+  const projectSectionData = await extractAllDatas(tabItems.project);
 
   return (
     <div>
