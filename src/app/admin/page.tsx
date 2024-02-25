@@ -13,8 +13,6 @@ import { FormData, tabItems } from "@/types/FormTypes";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import action from "../actions";
-
 const initialHomeFormData: FormData = {
   _id: "",
   heading: "",
@@ -223,7 +221,6 @@ export default function AdminView() {
       setHomeViewFormData(response && response.data[0]);
     } else {
       if (response?.success) {
-        action();
         setAllData({
           ...allData,
           [currentSelectedTab]: response && response.data,

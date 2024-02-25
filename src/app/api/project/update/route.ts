@@ -3,6 +3,8 @@ import Project from "@/models/Project";
 import { ProjectDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function PUT(req: Request) {
   try {
     await connectToDB();

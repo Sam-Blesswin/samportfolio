@@ -3,6 +3,8 @@ import Home from "@/models/Home";
 import { HomeDocument } from "@/types/DocumentDataTypes";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await connectToDB();
