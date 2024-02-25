@@ -10,7 +10,6 @@ import AdminLogin from "@/components/admin-view/AdminLogin";
 import { useEffect, useState } from "react";
 import { getData, updateData, deleteData, login } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
-import action from "../actions";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -127,7 +126,6 @@ export default function AdminView() {
 
     if (response.success) {
       toast.success("Updated successfully!");
-      action();
       resetFormDatas();
       extractAllDatas();
     }

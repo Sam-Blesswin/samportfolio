@@ -9,13 +9,15 @@ import { tabItems } from "@/types/FormTypes";
 
 async function extractAllDatas(currentSection: tabItems) {
   try {
-    const response = await fetch(
-      `${process.env.API_URL}/api/${currentSection}/get`,
-      {
-        method: "GET",
-        cache: "no-store",
-      }
-    );
+    const url =
+      process.env.NODE_ENV === "development"
+        ? `${process.env.API_URL}/api/${currentSection}/get`
+        : `/api/${currentSection}/get`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
