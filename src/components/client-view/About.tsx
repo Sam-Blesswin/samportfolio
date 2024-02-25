@@ -88,7 +88,7 @@ export default function ClientAboutView({ data }: Props) {
         </motion.div>
       </div>
       <div className="flex flex-col justify-center items-center row-start-2 sm:row-start-1">
-        <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-medium text-primary-500">
+        <h1 className="leading-[30px] mb-4 text-xl lg:text-4xl xl:text-5xl font-medium text-primary-500">
           {headingText}
         </h1>
         <p className="text-[#fff] mt-4 mb-8 font-bold">{data?.aboutme}</p>
@@ -119,18 +119,21 @@ export default function ClientAboutView({ data }: Props) {
         >
           <motion.div
             variants={variants()}
-            className="grid gap-4 grid-cols-3 h-full max-h-[200px] w-full"
+            className="grid gap-4 grid-cols-2 md:grid-cols-3 h-full max-h-[200px] w-full"
           >
-            {data?.skills.split(", ").map((skill: string, index: number) => (
-              <motion.div
-                key={index}
-                className="w-full flex justify-center items-center"
-              >
-                <div className="py-3 w-[160px] px-6 border-[2px] border-black bg-gradient-to-r from-primary-500 to-secondary-500 text-[#fff] text-center rounded-lg tracking-widest transition-all outline-none">
-                  {skill}
-                </div>
-              </motion.div>
-            ))}
+            {data?.skills
+              .split(", ")
+              .slice(0, window.innerWidth <= 768 ? 8 : 9)
+              .map((skill: string, index: number) => (
+                <motion.div
+                  key={index}
+                  className="w-full flex justify-center items-center"
+                >
+                  <div className="py-3 w-[160px] px-3 border-[2px] border-black bg-gradient-to-r from-primary-500 to-secondary-500 text-[#fff] text-center rounded-lg tracking-widest transition-all outline-none">
+                    {skill}
+                  </div>
+                </motion.div>
+              ))}
           </motion.div>
         </motion.div>
       </div>
