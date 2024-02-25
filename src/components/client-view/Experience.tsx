@@ -80,11 +80,11 @@ export default function ClientExperienceAndEducationView({
                           <p className="font-extrabold mt-2">
                             {educationItem.degree}
                           </p>
-                          <p className="font-bold mt-2">
-                            {educationItem.courses}
-                          </p>
                           <p className="font-extralight mt-2">
                             {educationItem.description}
+                          </p>
+                          <p className="font-light mt-2  text-primary-400">
+                            {educationItem.courses}
                           </p>
                         </div>
                       </div>

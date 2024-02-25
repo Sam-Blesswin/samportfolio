@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { getData, updateData, deleteData, login } from "@/services";
 import { FormData, tabItems } from "@/types/FormTypes";
 import action from "../actions";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialHomeFormData: FormData = {
   _id: "",
@@ -102,6 +104,7 @@ export default function AdminView() {
     console.log(response);
 
     if (response.success) {
+      toast.success("Deleted successfully!");
       extractAllDatas();
     }
   }
@@ -123,6 +126,7 @@ export default function AdminView() {
     console.log(response);
 
     if (response.success) {
+      toast.success("Updated successfully!");
       action();
       resetFormDatas();
       extractAllDatas();
@@ -281,6 +285,7 @@ export default function AdminView() {
             )
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 }

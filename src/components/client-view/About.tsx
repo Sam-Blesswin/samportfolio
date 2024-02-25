@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import aboutMeImage from "@/assets/about-image.png";
+import about from "@/assets/about.png";
 import { AboutDocument } from "@/types/DocumentDataTypes";
 
 function variants() {
@@ -102,7 +102,7 @@ export default function ClientAboutView({ data }: Props) {
         >
           <motion.div variants={variants()} className="h-full w-full p-4">
             <Image
-              src={aboutMeImage}
+              src={about}
               alt="About Me"
               layout="responsive"
               height={414}
