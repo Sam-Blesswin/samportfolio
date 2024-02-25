@@ -5,17 +5,52 @@ import Footer from "@/components/client-view/Footer";
 import ClientHomeView from "@/components/client-view/Home";
 import Navbar from "@/components/client-view/Navbar";
 import ClientProjectView from "@/components/client-view/Project";
+import connectToDB from "@/database";
+import About from "@/models/About";
+import Education from "@/models/Education";
+import Experience from "@/models/Experience";
+import Home from "@/models/Home";
+import Project from "@/models/Project";
+
+const sectionModelMap: { [key: string]: any } = {
+  about: About,
+  home: Home,
+  education: Education,
+  experience: Experience,
+  project: Project,
+};
 
 async function extractAllDatas(currentSection: string) {
-  const res = await fetch(`${process.env.API_URL}/${currentSection}/get`, {
-    method: "GET",
-  });
+  try {
+    if (process.env.MODE === "build") {
+      await connectToDB();
 
-  const data = await res.json();
-  return data && data.data;
+      const model = sectionModelMap[currentSection];
+
+      const extractData: any = await model.find({});
+      return extractData;
+    } else {
+      const response = await fetch(
+        `${process.env.API_URL}/${currentSection}/get`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data && data.data ? data.data : null;
+    }
+  } catch (error) {
+    console.error(`An error occurred: ${error}`);
+    return null;
+  }
 }
 
-export default async function Home() {
+export default async function HomePage() {
   const homeSectionData = await extractAllDatas("home");
   const aboutSectionData = await extractAllDatas("about");
   const experienceSectionData = await extractAllDatas("experience");
