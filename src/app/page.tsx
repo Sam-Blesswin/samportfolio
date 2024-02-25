@@ -5,12 +5,23 @@ import Footer from "@/components/client-view/Footer";
 import ClientHomeView from "@/components/client-view/Home";
 import Navbar from "@/components/client-view/Navbar";
 import ClientProjectView from "@/components/client-view/Project";
-import { getData } from "@/services";
 import { tabItems } from "@/types/FormTypes";
 
 async function extractAllDatas(currentSection: tabItems) {
   try {
-    const data = await getData(currentSection);
+    const response = await fetch(
+      `${process.env.API_URL}/api/${currentSection}/get`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
     return data && data.data ? data.data : null;
   } catch (error) {
     console.error(`An error occurred: ${error}`);

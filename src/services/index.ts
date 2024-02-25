@@ -52,13 +52,16 @@ export async function updateData(currentTab: tabItems, formData: FormData) {
 
 export async function deleteData(currentTab: tabItems, id: string) {
   try {
-    const response = await fetch(`/api/${currentTab}/delete`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    });
+    const response = await fetch(
+      `${process.env.API_URL}/api/${currentTab}/delete`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      }
+    );
 
     const result = await response.json();
 
@@ -70,7 +73,7 @@ export async function deleteData(currentTab: tabItems, id: string) {
 
 export async function login(formData: FormData) {
   try {
-    const response = await fetch(`/api/login`, {
+    const response = await fetch(`${process.env.API_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
