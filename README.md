@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sam's Portfolio
 
-## Getting Started
+Welcome to the repository for Sam's Portfolio, a modern portfolio website built with Next.js 14. This project showcases a frontend portfolio along with a backend admin content management dashboard, providing a comprehensive platform for personal branding and content management.
 
-First, run the development server:
+## Features
+
+- **Next.js 14**: Leveraging the latest features of Next.js for fast, server-rendered React applications.
+- **Responsive Design**: Ensures a great user experience across all device sizes.
+- **MongoDB**: Utilizes MongoDB for efficient content storage and retrieval.
+- **EmailJS**: Integrated EmailJS for seamless contact form submissions without the need for a backend server.
+- **Admin Dashboard**: A secure admin dashboard for content management.
+
+## Live Demo
+
+Check out the live demo of the portfolio here: [Sam's Portfolio](https://samblesswin-portfolio.vercel.app/)
+
+## Local Development
+
+### Prerequisites
+
+- Node.js (LTS version recommended)
+- MongoDB account and database
+- EmailJS account
+
+### Cloning the Repository
+
+To get started with local development, first clone the repository to your local machine:
+
+```bash
+git clone https://github.com/Sam-Blesswin/samportfolio.git
+cd samportfolio
+```
+
+### Installation
+
+Install the required dependencies:
+
+```bash
+npm install
+```
+
+or if you prefer using Yarn:
+
+```bash
+yarn install
+```
+
+### Configuration
+
+Before running the application, you need to set up your environment variables. Add a `.env.local` file and update it with your details:
+
+```plaintext
+DATABASE_URL=<Your MongoDB URL>
+URL=<Your Host URL>
+SERVICE_ID=<Your EmailJS Service ID>
+TEMPLATE_ID=<Your EmailJS Template ID>
+PUBLIC_KEY=<Your EmailJS Public Key>
+ACCESS_TOKEN=<Your EmailJS Access Token>
+```
+
+### Running the Application
+
+To start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or if you're using Yarn:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Access the portfolio at [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+### Accessing the Admin Dashboard
 
-To learn more about Next.js, take a look at the following resources:
+The admin dashboard is available at [http://localhost:3000/admin](http://localhost:3000/admin). To access it, ensure you have created a document in your MongoDB database under the "users" collection with the following format:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{
+  "username": "your_username",
+  "password": "your_password"
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Replace `your_username` and `your_password` with your preferred credentials.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is set up for easy deployment with Vercel, ensuring smooth CI/CD integration. For detailed instructions on deploying to Vercel, please refer to their [official documentation](https://vercel.com/docs).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributions
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue for any bugs or improvements.
