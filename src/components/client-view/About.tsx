@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import about from "@/assets/about.png";
 import { AboutDocument } from "@/types/DocumentDataTypes";
+import { useEffect, useState } from "react";
 
 function variants() {
   return {
@@ -45,6 +46,19 @@ export default function ClientAboutView({ data }: Props) {
   ];
 
   const headingText = "Why Hire Me For Your Next Project ?";
+
+  const [skillsToShow, setskillsToShow] = useState(8);
+
+  useEffect(() => {
+    const updateskills = () => {
+      setskillsToShow(window.innerWidth <= 768 ? 8 : 9);
+    };
+
+    updateskills();
+
+    window.addEventListener("resize", updateskills);
+    return () => window.removeEventListener("resize", updateskills);
+  }, []);
 
   return (
     <div
@@ -123,7 +137,7 @@ export default function ClientAboutView({ data }: Props) {
           >
             {data?.skills
               .split(", ")
-              .slice(0, window.innerWidth <= 768 ? 8 : 9)
+              .slice(0, skillsToShow)
               .map((skill: string, index: number) => (
                 <motion.div
                   key={index}
